@@ -1,0 +1,220 @@
+body {
+	width: 85%;
+    background:#fff;
+	margin-left:auto;
+	margin-right:auto;
+}
+ 
+.clearfix:after {
+    display:block;
+    clear:both;
+}
+ 
+/*----- Menu Outline -----*/
+.menu-wrap {
+    width:100%;
+}
+ 
+.menu {
+    width:938px;
+    margin:auto;
+}
+.menu ul {
+	background:white;
+	transition:.5s;
+}
+
+.menu li {
+	position:relative;
+	transition:.5s;
+    margin:0px;
+    list-style:none;
+    font-family:'Roboto', sans-serif;
+	cursor: pointer;
+}
+
+.menu a {
+	display:block;
+	text-decoration:none;
+	padding:5px 15px;
+	color:#000;
+	transition:all linear 0.15s;
+}
+
+.menu > ul > li {
+    float:left;
+    display:block;
+    position:relative;
+    font-size:15px;
+}
+
+.menu ul ul {
+	position:absolute;
+	left:0;
+	top:100%;
+	display:none;
+	opacity:0;
+}
+
+.menu ul ul ul {
+	left:100%;
+	top:0;
+}
+
+.menu li:hover {
+	background:#cde;
+}
+
+.menu li li:hover {
+	background:#def;
+}
+
+.menu li li li:hover {
+	background:#def;
+}
+
+.menu li:hover > ul {
+	display:block;
+	opacity:1;
+}
+ 
+.arrow {
+    font-size:11px;
+	line-height:0%;
+	text-decoration:none;
+}
+ 
+/*----- Data Group Menu -----*/
+.menu li:hover .sub-menu {
+    z-index:1;
+    opacity:1;
+}
+ 
+.sub-menu {
+    width:100%;
+    padding:5px 0px;
+    position:absolute;
+    top:100%;
+    left:0px;
+    z-index:-1;
+    opacity:0;
+    transition:opacity linear 0.15s;
+    background:#fff;
+}
+ 
+.sub-menu li {
+    display:block;
+    font-size:12px;
+}
+ 
+.sub-menu li a {
+    padding:10px 10px;
+    display:block;
+}
+ 
+.sub-menu li a:hover {
+    background:#def;
+}
+
+/*----- Data Menu -----*/
+.menu li:hover .scrollable-menu {
+    z-index:1;
+    opacity:1;
+}
+
+.scrollable-menu {
+    padding:0;
+    position:absolute;
+    top:100%;
+    left:0px;
+    z-index:-1;
+    opacity:0;
+    transition:opacity linear 0.15s;
+    background:#fff;
+}
+
+.scrollable-menu ul {
+  padding:0;
+  margin:0;
+  background:#fff;
+}
+
+.scrollable-menu ul li {
+  display:block;
+  position:relative;
+  background:#fff;
+}
+
+.scrollable-menu li {
+    display:block;
+    font-size:12px;
+}
+
+.scrollable-menu li a {
+    padding:10px 10px;
+    display:block;
+}
+#map {
+	background-color:#fff;
+	border:none;
+	width:100%;
+}
+.background {
+	fill:none;
+	pointer-events:all;
+}
+
+#countries {
+	fill:#cde;
+	stroke:#fff;
+	stroke-linejoin:round;
+	stroke-linecap:round;
+}
+
+pre.prettyprint {
+	border:1px solid #ccc;
+	margin-bottom:0;
+	padding:9.5px;
+}
+	
+#tooltip {
+	margin-left: auto;
+	margin-right: auto;
+	max-width:800px;
+	background:#fff;
+	text-align:center;
+	font-family:'Roboto', sans-serif;
+	font-size:12px;
+	position:relative;
+}
+
+.left-column {
+	float:left;
+	width:50%;
+}
+
+.right-column {
+	float:right;
+	width:50%;
+}
+
+#legend {
+	vertical-align: top;
+	width:100%;
+}
+
+#table {
+	font-family:'Roboto', sans-serif;
+}
+
+th {
+	background-color: #cde;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+
+tr:hover {background-color: #def;}
