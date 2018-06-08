@@ -5,12 +5,12 @@ var m_width = $("#map").width(),
 	country_data,
     country;
 
-var projection = d3.geoMercator()
+var projectionFlat = d3.geoMercator()
     .scale(150)
     .translate([width / 2, height / 1.5]);
 
-var path = d3.geoPath()
-    .projection(projection);
+var pathFlat = d3.geoPath()
+    .projection(projectionFlat);
 
 var svg = d3.select("#map").append("svg")
     .attr("preserveAspectRatio", "xMidYMid")
@@ -36,7 +36,7 @@ d3.json("data/countries_pretty.topo.json", function(error, us) {
 	.enter()
 	.append("path")
 	.attr("id", function(d) { return d.id; })
-	.attr("d", path)
+	.attr("d", pathFlat)
 	.on("click", country_clicked);
 });
 
@@ -47,13 +47,13 @@ var tooltip = d3.select("body")
 function zoom(xyz) {
   g.transition()
 	.duration(750)
-	.attr("transform", "translate(" + projection.translate() + ")scale(" + xyz[2] + ")translate(-" + xyz[0] + ",-" + xyz[1] + ")")
+	.attr("transform", "translate(" + projectionFlat.translate() + ")scale(" + xyz[2] + ")translate(-" + xyz[0] + ",-" + xyz[1] + ")")
 	.selectAll(["#countries"])
 	.style("stroke-width", 1.0 / xyz[2] + "px");
 }
 
 function get_xyz(d) {
-  var bounds = path.bounds(d);
+  var bounds = pathFlat.bounds(d);
   var w_scale = (bounds[1][0] - bounds[0][0]) / width;
   var h_scale = (bounds[1][1] - bounds[0][1]) / height;
   var z = .80 / Math.max(w_scale, h_scale);
@@ -75,9 +75,7 @@ function country_clicked(d) {
 	if (data_name == 'none'){
 		d3.select(this).style("fill", "#fa5");
 	}
-	
 	name = d.properties.name;
-	
 	for (var i = 0; i < dataset.length; i++)
 	{
 		if (dataset[i].country == name)
@@ -102,11 +100,11 @@ function render_map(){
 	if(document.getElementById("map").style.display == 'none'){
         document.getElementById("map").style.display = 'block';
         document.getElementById("table").style.display = 'none';
-    } 
+	document.getElementById("globe").style.display = 'none';
+    }
 }
 
 function update_tooltip() {
-	
 	if (country != null) {
 		tooltip.selectAll("div").remove();
 		if (data_name == 'none') {

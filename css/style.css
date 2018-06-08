@@ -159,6 +159,12 @@ body {
 	border:none;
 	width:100%;
 }
+#globe {
+        background-color:#fff;
+        border:none;
+        width:100%;
+}
+
 .background {
 	fill:none;
 	pointer-events:all;
