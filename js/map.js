@@ -19,17 +19,14 @@ var svg = d3.select("#map").append("svg")
     .attr("height", m_width * height / width)
 	.append("g");
 
-
 svg.append("rect")
 	.attr("class", "background")
 	.attr("width", width)
 	.attr("height", height)
 	.on("click", country_clicked);
 
-var g = svg.append("g");
-
 d3.json("data/countries_pretty.topo.json", function(error, us) {
-  g.append("g")
+  svg.append("g")
 	.attr("id", "countries")
 	.selectAll("path")
 	.data(topojson.feature(us, us.objects.countries).features)
@@ -45,7 +42,7 @@ var tooltip = d3.select("body")
 	.attr("id","tooltip");
 
 function zoom(xyz) {
-  g.transition()
+  svg.transition()
 	.duration(750)
 	.attr("transform", "translate(" + projectionFlat.translate() + ")scale(" + xyz[2] + ")translate(-" + xyz[0] + ",-" + xyz[1] + ")")
 	.selectAll(["#countries"])
@@ -65,7 +62,7 @@ function get_xyz(d) {
 function country_clicked(d) {
 
   if (country && data_name == 'none') {
-	g.selectAll('path').style("fill","#cde");
+	svg.selectAll('path').style("fill","#cde");
   }
 
   if (d && country !== d) {
