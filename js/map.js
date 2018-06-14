@@ -7,10 +7,11 @@ var m_width = $("#map").width(),
 
 var projectionFlat = d3.geoMercator()
     .scale(150)
-    .translate([width / 2, height / 1.5]);
+	.translate([width / 2, height / 1.5]);
+	//.rotate([-10,0]);
 
 var pathFlat = d3.geoPath()
-    .projection(projectionFlat);
+	.projection(projectionFlat);
 
 var svg = d3.select("#map").append("svg")
     .attr("preserveAspectRatio", "xMidYMid")
