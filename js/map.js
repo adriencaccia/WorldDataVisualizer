@@ -46,7 +46,7 @@ var tooltip = d3.select("body")
 
 function zoom(xyz) {
   g.transition()
-	.duration(750)
+	.duration(1000)
 	.attr("transform", "translate(" + projectionFlat.translate() + ")scale(" + xyz[2] + ")translate(-" + xyz[0] + ",-" + xyz[1] + ")")
 	.selectAll(["#countries"])
 	.style("stroke-width", 1.0 / xyz[2] + "px");
@@ -65,6 +65,7 @@ function get_xyz(d) {
 function country_clicked(d) {
 
   if (country && data_name == 'none') {
+  	document.getElementById("data_card").style.visibility='hidden';
 	g.selectAll('path').style("fill","#cde");
   }
 
@@ -106,20 +107,30 @@ function render_map(){
 
 function update_tooltip() {
 	if (country != null) {
+		var card = document.getElementById("data_card");
+		setTimeout(function(){
+		card.style.visibility='visible';
+		}, 1000);
+
+
 		tooltip.selectAll("div").remove();
+		var card_body = card.getElementsByClassName("card-body")[0];
+		card_body.getElementsByClassName("card-title")[0].innerHTML = "<h2> "+country_data.country+"</h2>";
 		if (data_name == 'none') {
 			switch (data_type) {
 				case 'general':
-					tooltip.append("div")
+					/*tooltip.append("div")
 						.html(	"Country: "+country_data.country+
 								"<br/>Area: "+country_data.area_sqkm.toLocaleString("en-US")+" km²"+
-								"<br/>Population : "+country_data.population.toLocaleString("en-US")+" inh.");
+								"<br/>Population : "+country_data.population.toLocaleString("en-US")+" inh.");*/
+					card_body.getElementsByClassName("card-text")[0].innerHTML = ("<br/><b>Area</b>: "+country_data.area_sqkm.toLocaleString("en-US")+" km²"+
+								"<br/><b>Population</b> : "+country_data.population.toLocaleString("en-US")+" inh.");
 					break;
 				case 'economics':
-					tooltip.append("div")
+					/*tooltip.append("div")
 						.attr("position","relative")
 						.html("Country: "+country_data.country);
-					tooltip.append("div")
+					card_body.getElementsByClassName("card-text")[0].append("div")
 						.attr("class","left-column")
 						.attr("id","left")
 						.html(	"GDP: "+country_data.gdp.toLocaleString("en-US")+" USD"+
@@ -140,10 +151,25 @@ function update_tooltip() {
 					tooltip.append("div")
 						.attr("position","relative")
 						.html(	"Military expenditures: "+country_data.military_dollar.toLocaleString("en-US")+" USD / "+country_data.military_gdp.toLocaleString("en-US")+" % of GDP"+
-								"<br/>Foreign exchange & gold reserves: "+country_data.gold_reserves.toLocaleString("en-US")+" USD");
+								"<br/>Foreign exchange & gold reserves: "+country_data.gold_reserves.toLocaleString("en-US")+" USD");*/
+					card_body.getElementsByClassName("card-text")[0].innerHTML = "<b>GDP</b>: "+country_data.gdp.toLocaleString("en-US")+" USD"+
+								"<br/><b>Inflation</b>: "+country_data.inflation.toLocaleString("en-US")+" %"+
+								"<br/><b>External debt</b>: "+country_data.debt_external.toLocaleString("en-US")+" USD"+
+								"<br/><b>Imports</b>: "+country_data.imports.toLocaleString("en-US")+" USD"+
+								"<br/><b>Account balance</b>: "+country_data.account_balance.toLocaleString("en-US")+" USD"+
+								"<br/><b>Unemployment rate</b>: "+country_data.unemployment.toLocaleString("en-US")+" %" + '<br>' +
+								"<b>GDP per capita</b>: "+country_data.gdp_percapita.toLocaleString("en-US")+" USD/inh."+
+								"<br/><b>GDP growth rate</b>: "+country_data.gdp_growthrate.toLocaleString("en-US")+" %"+
+								"<br/><b>Public debt</b>: "+country_data.debt_public.toLocaleString("en-US")+" % of GDP"+
+								"<br/><b>Exports</b>: "+country_data.exports.toLocaleString("en-US")+" USD"+
+								"<br/><b>Investment</b>: "+country_data.investment.toLocaleString("en-US")+" % of GDP"+
+								"<br/><b>Labor force</b>: "+country_data.labor_force.toLocaleString("en-US")+" people" + '<br>' +
+								"<b>Military expenditures</b>: "+country_data.military_dollar.toLocaleString("en-US")+" USD / "+country_data.military_gdp.toLocaleString("en-US")+" % of GDP"+
+								"<br/><b>Foreign exchange & gold reserves</b>: "+country_data.gold_reserves.toLocaleString("en-US")+" USD";
+
 					break;
 				case 'resources':
-					tooltip.append("div")
+					/*tooltip.append("div")
 						.attr("position","relative")
 						.html("Country: "+country_data.country);
 					tooltip.append("div")
@@ -161,10 +187,20 @@ function update_tooltip() {
 								"<br/>Gas consumption: "+country_data.gas_consumption.toLocaleString("en-US")+" m&sup3"+
 								"<br/>Gas imports: "+country_data.gas_imports.toLocaleString("en-US")+" m&sup3"+
 								"<br/>Oil consumption: "+country_data.oil_consumption.toLocaleString("en-US")+" bbl/day"+
-								"<br/>Oil imports: "+country_data.oil_imports.toLocaleString("en-US")+" bbl/day");
+								"<br/>Oil imports: "+country_data.oil_imports.toLocaleString("en-US")+" bbl/day");*/
+						card_body.getElementsByClassName("card-text")[0].innerHTML = "<b>Electricity production</b>: "+country_data.elec_production.toLocaleString("en-US")+" kWh"+
+								"<br/><b>Gas production</b>: "+country_data.gas_production.toLocaleString("en-US")+" m&sup3"+
+								"<br/><b>Gas exports</b>: "+country_data.gas_exports.toLocaleString("en-US")+" m&sup3"+
+								"<br/><b>Oil production</b>: "+country_data.oil_production.toLocaleString("en-US")+" bbl/day"+
+								"<br/><b>Oil exports</b>: "+country_data.oil_exports.toLocaleString("en-US")+" bbl/day" +
+								"<br/><b>Electricity consumption</b>: "+country_data.elec_consumption.toLocaleString("en-US")+" kWh"+
+								"<br/><b>Gas consumption</b>: "+country_data.gas_consumption.toLocaleString("en-US")+" m&sup3"+
+								"<br/><b>Gas imports</b>: "+country_data.gas_imports.toLocaleString("en-US")+" m&sup3"+
+								"<br/><b>Oil consumption</b>: "+country_data.oil_consumption.toLocaleString("en-US")+" bbl/day"+
+								"<br/><b>Oil imports</b>: "+country_data.oil_imports.toLocaleString("en-US")+" bbl/day";
 					break;
 				case 'health':
-					tooltip.append("div")
+					/*tooltip.append("div")
 						.attr("position","relative")
 						.html("Country: "+country_data.country);
 					tooltip.append("div")
@@ -181,10 +217,15 @@ function update_tooltip() {
 								"<br/>People dead because of HIV: "+country_data.hiv_deaths.toLocaleString("en-US"));
 					tooltip.append("div")
 						.html(	"HIV prevalence rate: "+country_data.hiv_prevalence.toLocaleString("en-US")+" %"+
-								"<br/>Fertility rate: "+country_data.fertility_rate.toLocaleString("en-US")+" children born/woman");
+								"<br/>Fertility rate: "+country_data.fertility_rate.toLocaleString("en-US")+" children born/woman");*/
+					card_body.getElementsByClassName("card-text")[0].innerHTML = "<b>Birth rate</b>: "+country_data.birth_rate.toLocaleString("en-US")+" births/1000 people"+
+								"<br/><b>Life expectancy at birth</b>: "+country_data.life_expectancy.toLocaleString("en-US")+" years"+
+								"<br/><b>People living with HIV</b>: "+country_data.hiv_living.toLocaleString("en-US")+
+								"<br/><b>HIV prevalence rate</b>: "+country_data.hiv_prevalence.toLocaleString("en-US")+" %"+
+								"<br/><b>Fertility rate</b>: "+country_data.fertility_rate.toLocaleString("en-US")+" children born/woman"
 					break;
 				case 'tech':
-					tooltip.append("div")
+					/*tooltip.append("div")
 						.attr("position","relative")
 						.html("Country: "+country_data.country);
 					tooltip.append("div")
@@ -198,14 +239,32 @@ function update_tooltip() {
 						.attr("id","right")
 						.html(	"Railways: "+country_data.railways.toLocaleString("en-US")+" km"+
 								"<br/>Internet users: "+country_data.internet_users.toLocaleString("en-US")+
-								"<br/>Telephone mobile lines: "+country_data.telephone_mobile.toLocaleString("en-US"));
+								"<br/>Telephone mobile lines: "+country_data.telephone_mobile.toLocaleString("en-US"));*/
+					card_body.getElementsByClassName("card-text")[0].innerHTML = "<b>Highways</b>: "+country_data.highways.toLocaleString("en-US")+" km"+
+								"<br/><b>Internet hosts</b>: "+country_data.internet_hosts.toLocaleString("en-US")+
+								"<br/><b>Telephone main lines</b>: "+country_data.telephone_mainlines.toLocaleString("en-US") + 
+								"<br/><b>Railways</b>: "+country_data.railways.toLocaleString("en-US")+" km"+
+								"<br/><b>Internet users</b>: "+country_data.internet_users.toLocaleString("en-US")+
+								"<br/><b>Telephone mobile lines</b>: "+country_data.telephone_mobile.toLocaleString("en-US")
 					break;
 			}
-		} else {
-			tooltip.append("div")
-				.attr("position","relative")
-				.html(	"Country: "+country_data.country+
-						"<br/>"+data_name_pretty+": "+country_data[data_name].toLocaleString("en-US")+data_unit);
 		}
 	}
+}
+
+function change(str){
+	card_header = document.getElementById('data_card').getElementsByClassName('card-header')[0].getElementsByTagName("ul")[0];
+	lis = card_header.getElementsByTagName("li")
+	//console.log(lis)
+	for(i = 0;i < lis.length; i++){
+		var a=lis[i].getElementsByClassName('nav-link')[0];
+		if(lis[i].id==str && !(a.classList.contains('active'))){
+				a.classList.add('active');
+		}
+		else if(lis[i].id!=str){
+			a.classList.remove('active')
+		}
+	}
+	data_type = str;
+	update_tooltip();
 }

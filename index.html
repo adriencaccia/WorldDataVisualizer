@@ -3,11 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title> Data Visualisation </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="css/style.css"> 
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.8.0/d3.js"></script>
+
 	<script src="https://unpkg.com/topojson-client@3"></script>
-	<script src="//code.jquery.com/jquery-2.0.0.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 	<script src="https://d3js.org/d3-color.v1.min.js"></script>
 	<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
 	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
@@ -15,91 +17,76 @@
   </head>
 
   <body>
-	<div class="menu-wrap">
-		<nav class="menu">
-			<ul class="clearfix">
-				<li><a onclick="render_map()">Map</a></li>
-				<li><a onclick="render_globe()">Globe</a></li>
-				<li><a onclick="render_table()">Table</a></li>
-				<li><a>Data Group <span class="arrow">&#9660;</span></a>
-					<ul class="sub-menu">
-						<li><a onclick="setDataType('general')">General</a></li>
-						<li><a onclick="setDataType('economics')">Economics</a></li>
-						<li><a onclick="setDataType('resources')">Resources</a></li>
-						<li><a onclick="setDataType('health')">Health</a></li>
-						<li><a onclick="setDataType('tech')">Tech</a></li>
-					</ul>
-				</li>
-				<li><a>Data <span class="arrow">&#9660;</span></a>
-					<ul class="scrollable-menu">
-						<li><a onclick="setDataName('none',this.innerHTML)">None</a></li>
-						<li><a>General</a>
-							<ul>
-								<li><a class="scrollable-item" onclick="setDataName('area_sqkm',this.innerHTML)">Area</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('population',this.innerHTML)">Population</a></li>
-							</ul>
-						</li>
-						<li><a>Economics</a>
-							<ul>
-								<li><a class="scrollable-item" onclick="setDataName('account_balance',this.innerHTML)">Account balance</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('exports',this.innerHTML)">Exports</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('debt_external',this.innerHTML)">External debt</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('gold_reserves',this.innerHTML)">Foreign exchange & gold reserves</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('gdp',this.innerHTML)">GDP</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('gdp_growthrate',this.innerHTML)">GDP growth rate</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('gdp_percapita',this.innerHTML)">GDP per capita</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('imports',this.innerHTML)">Imports</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('inflation',this.innerHTML)">Inflation</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('investment',this.innerHTML)">Investment</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('labor_force',this.innerHTML)">Labor force</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('debt_public',this.innerHTML)">Public debt</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('military_gdp',this.innerHTML)">Military expenditures - GDP</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('military_dollar',this.innerHTML)">Military expenditures - USD</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('unemployment',this.innerHTML)">Unemployment rate</a></li>
-							</ul>
-						</li>
-						<li><a>Resources</a>
-							<ul>
-								<li><a class="scrollable-item" onclick="setDataName('elec_consumption',this.innerHTML)">Electricity consumption</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('elec_production',this.innerHTML)">Electricity production</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('gas_consumption',this.innerHTML)">Gas consumption</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('gas_exports',this.innerHTML)">Gas exports</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('gas_imports',this.innerHTML)">Gas imports</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('gas_production',this.innerHTML)">Gas production</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('oil_consumption',this.innerHTML)">Oil consumption</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('oil_exports',this.innerHTML)">Oil exports</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('oil_imports',this.innerHTML)">Oil imports</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('oil_production',this.innerHTML)">Oil production</a></li>
-							</ul>
-						</li>
-						<li><a>Health</a>
-							<ul>
-								<li><a class="scrollable-item" onclick="setDataName('birth_rate',this.innerHTML)">Birth rate</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('death_rate',this.innerHTML)">Death rate</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('fertility_rate',this.innerHTML)">Fertility rate</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('hiv_prevalence',this.innerHTML)">HIV prevalence rate</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('infant_mortality',this.innerHTML)">Infant mortality</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('life_expectancy',this.innerHTML)">Life expectancy</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('hiv_living',this.innerHTML)">People living with HIV</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('hiv_deaths',this.innerHTML)">People dead because of HIV</a></li>
-							</ul>
-						</li>
-						<li><a>Tech</a>
-							<ul>
-								<li><a class="scrollable-item" onclick="setDataName('highways',this.innerHTML)">Highways</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('internet_hosts',this.innerHTML)">Internet hosts</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('internet_users',this.innerHTML)">Internet users</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('railways',this.innerHTML)">Railways</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('telephone_mainlines',this.innerHTML)">Telephone - main</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('telephone_mobile',this.innerHTML)">Telephone - mobile</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</nav>
-	</div>
-	
+
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">World Data Visualizator</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" onclick="render_map()">Map</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" onclick="render_globe()">Globe </a>
+    </li>
+
+
+
+    <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Data Group</a>
+      <div class="dropdown-menu">
+      	<a class="dropdown-item" onclick="setDataType('general')">General</a>
+		<a class="dropdown-item" onclick="setDataType('economics')">Economics</a>
+		<a class="dropdown-item" onclick="setDataType('resources')">Resources</a>
+		<a class="dropdown-item" onclick="setDataType('health')">Health</a>
+		<a  class="dropdown-item" onclick="setDataType('tech')">Tech</a>
+      </div>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Data
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Link 1</a>
+        <a class="dropdown-item" href="#">Link 2</a>
+        <a class="dropdown-item" href="#">Link 3</a>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+
+<div id="data_card" class="card " style="position:absolute;z-index: 5;top:40%;left:40%;visibility: hidden">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li id="general" class="nav-item">
+        <a  class="nav-link active" onclick="change('general')">General</a>
+      </li>
+      <li id="economics" class="nav-item">
+        <a  class="nav-link" onclick="change('economics')">Economics</a>
+      </li>
+
+      <li id="resources" class="nav-item">
+        <a  class="nav-link" onclick="change('resources')">Resources</a>
+      </li>    
+
+      <li id="health" class="nav-item">
+        <a  class="nav-link" onclick="change('health')">Health</a>
+      </li>
+
+      <li id="tech" class="nav-item">
+        <a  class="nav-link" onclick="change('tech')">Tech</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <p class="card-text"></p>
+  </div>
+</div>
+
 	<div id="map" style="display:block"></div>
 	<!-- <svg id="legend"></svg> -->
 	<div id="globe" style="display:none"></div>
@@ -108,5 +95,9 @@
     <script type="text/javascript" src="js/map.js"></script>
     <script type="text/javascript" src="js/table.js"></script>
     <script type="text/javascript" src="js/globe.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
   </body>
 </html>
