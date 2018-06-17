@@ -41,10 +41,10 @@ $(document).ready(function(){
       <a class="nav-link"href="render.html">Explore</a>
     </li>
         <li class="nav-item">
-      <a class="nav-link">Compare</a>
+      <a class="nav-link" href="#">Compare</a>
     </li>
             <li class="nav-item">
-      <a class="nav-link">About us</a>
+      <a class="nav-link" id="aboutbut">About us</a>
     </li>
 
 
@@ -57,7 +57,7 @@ $(document).ready(function(){
   <h2>Welcome to World Data Visualizator</h2>
   <h3>Discover new things about the world's countries.</h3>
   <p>General Informations, Health, Tech, and more available with an interactive map.</p>
-  <a href="#two" id="but">
+  <a  id="but">
   <button type="button" id="#seemore" class="btn gradient-button">See more</button>
   </a>
 </div>
@@ -86,7 +86,7 @@ $(document).ready(function(){
            <img src="https://www.freeiconspng.com/uploads/compare-icon-5.png" class="img-fluid">
           </div>
           <h3>Compare</h3>
-          <p>Compare those data between the world's countries by selecting two of them from the map or the globe.</p>
+          <p>Compare those data between the world's countries by selof them from the map or the globe.</p>
           <button type="submit" class="btn btn-default">Let's go</button>
         </div>
       </div>
@@ -96,11 +96,26 @@ $(document).ready(function(){
 
 </div>
 
+</div>
+<div class ="black" id='about'>
+  <h2>IGR204 : Visualization</h2>
+  <h3>Professor : James Eagan</h3>
+    <h3>Students :</h3><h4> Ahmed Ben Saad<br>Adrien Cacciaguerra<br> Charles Boulitrop<br> Philippe Edwards </h4>
+</div>
+
+
+
+
   </body>
   <script >
-  $('a[href^="#"]').on('click', function(event) {
+  $('#but').on('click', function(event) {
   $('#welcome').hide();
   $('#cards').fadeIn(1500);
+});
+   $('#aboutbut').on('click', function(event) {
+  $('#welcome').hide();
+  $('#cards').hide();
+  $('#about').fadeIn(1500);
 });
   </script>
 </html>
