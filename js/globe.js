@@ -45,6 +45,9 @@ function country_clickedGlobe(d) {
 
   if (country && data_name == 'none') {
         gGlobe.selectAll('path').style("fill","#cde");
+        document.getElementById("data_card").style.visibility='hidden';
+        g.selectAll('path').style("fill","#cde");
+
   }
 
   if (d && country !== d) {

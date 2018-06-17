@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title> Data Visualisation </title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossOrigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="css/home.css"> 
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.8.0/d3.js"></script>
 
@@ -13,91 +14,93 @@
 	<script src="https://d3js.org/d3-color.v1.min.js"></script>
 	<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
 	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  
+  <script>
+  
+$(document).ready(function(){
+  $('#welcome').fadeIn(1000);
+});
+  </script>
 
   </head>
 
   <body>
 
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar-static-top ">
+      <div class="container">
+
   <!-- Brand -->
-  <a class="navbar-brand" href="#">World Data Visualizator</a>
+  <a class="navbar-brand" href="index.html">World Data Visualizator</a>
 
   <!-- Links -->
-  <ul class="navbar-nav">
+  <ul class="navbar-nav navbar-btn">
     <li class="nav-item">
-      <a class="nav-link" onclick="render_map()">Map</a>
+      <a class="nav-link" href="#" >Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" onclick="render_globe()">Globe </a>
+      <a class="nav-link"href="render.html">Explore</a>
+    </li>
+        <li class="nav-item">
+      <a class="nav-link">Compare</a>
+    </li>
+            <li class="nav-item">
+      <a class="nav-link">About us</a>
     </li>
 
 
 
-    <!-- Dropdown -->
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Data Group</a>
-      <div class="dropdown-menu">
-      	<a class="dropdown-item" onclick="setDataType('general')">General</a>
-		<a class="dropdown-item" onclick="setDataType('economics')">Economics</a>
-		<a class="dropdown-item" onclick="setDataType('resources')">Resources</a>
-		<a class="dropdown-item" onclick="setDataType('health')">Health</a>
-		<a  class="dropdown-item" onclick="setDataType('tech')">Tech</a>
-      </div>
-    </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        Data
-      </a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Link 1</a>
-        <a class="dropdown-item" href="#">Link 2</a>
-        <a class="dropdown-item" href="#">Link 3</a>
-      </div>
-    </li>
   </ul>
+</div>
 </nav>
-
-
-<div id="data_card" class="card " style="position:absolute;z-index: 5;top:40%;left:40%;visibility: hidden">
-  <div class="card-header">
-    <ul class="nav nav-tabs card-header-tabs">
-      <li id="general" class="nav-item">
-        <a  class="nav-link active" onclick="change('general')">General</a>
-      </li>
-      <li id="economics" class="nav-item">
-        <a  class="nav-link" onclick="change('economics')">Economics</a>
-      </li>
-
-      <li id="resources" class="nav-item">
-        <a  class="nav-link" onclick="change('resources')">Resources</a>
-      </li>    
-
-      <li id="health" class="nav-item">
-        <a  class="nav-link" onclick="change('health')">Health</a>
-      </li>
-
-      <li id="tech" class="nav-item">
-        <a  class="nav-link" onclick="change('tech')">Tech</a>
-      </li>
-    </ul>
-  </div>
-  <div class="card-body">
-    <h5 class="card-title"></h5>
-    <p class="card-text"></p>
-  </div>
+</body>
+<div class ="black" id='welcome'>
+  <h2>Welcome to World Data Visualizator</h2>
+  <h3>Discover new things about the world's countries.</h3>
+  <p>General Informations, Health, Tech, and more available with an interactive map.</p>
+  <a href="#two" id="but">
+  <button type="button" id="#seemore" class="btn gradient-button">See more</button>
+  </a>
 </div>
 
-	<div id="map" style="display:block"></div>
-	<!-- <svg id="legend"></svg> -->
-	<div id="globe" style="display:none"></div>
-	<div id="table" style="display:none"></div>
-    <script type="text/javascript" src="js/init.js"></script>
-    <script type="text/javascript" src="js/map.js"></script>
-    <script type="text/javascript" src="js/table.js"></script>
-    <script type="text/javascript" src="js/globe.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<div class ="black" id='cards' style="display:none;">
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
+<div class="services-section" id="services">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="service_box">
+          <div class="service_icon">
+            <img src="http://icons.iconarchive.com/icons/custom-icon-design/mono-general-4/256/eye-icon.png" class="img-fluid">
+          </div>
+          <h3>Explore</h3>
+          <p>Explore some intresting informations about the world's countries using our interactive map or globe.</p>
+          <a href="render.html">
+          <button type="submit" class="btn btn-default">Let's go</button>
+        </a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="service_box">
+          <div class="service_icon">
+           <img src="https://www.freeiconspng.com/uploads/compare-icon-5.png" class="img-fluid">
+          </div>
+          <h3>Compare</h3>
+          <p>Compare those data between the world's countries by selecting two of them from the map or the globe.</p>
+          <button type="submit" class="btn btn-default">Let's go</button>
+        </div>
+      </div>
+      <div class="clearfix"> </div>
+    </div>
+  </div>
+
+</div>
 
   </body>
+  <script >
+  $('a[href^="#"]').on('click', function(event) {
+  $('#welcome').hide();
+  $('#cards').fadeIn(1500);
+});
+  </script>
 </html>

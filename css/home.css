@@ -1,0 +1,62 @@
+body{
+  	margin:0;
+  	padding:0;
+  	background: url('http://bsnscb.com/data/out/216/39730665-world-map-wallpapers.png') no-repeat center fixed; 
+	position:relative;
+    background-size: 100% 100%;
+
+}
+.black{
+	background-color: rgba(0,0,0,0.8);
+    padding:15% 0 20% 0;
+    width:100%;
+        height: 100vh;
+
+    display:none;
+	color : #FFFFFF;
+	text-align: center;
+	font-size: 90%;
+}
+
+.gradient-button{
+	margin-top: 10%;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(23,23,255,0.2) 49%, rgba(0,0,0,0.15) 51%, rgba(0,0,0,0.05));
+    background-repeat: repeat-x;
+}
+
+body {
+    font-family: 'Roboto';font-size: 15px;
+}
+.services-section {padding: 1em 0 5em;text-align: center;}
+.service_box {padding: 1em;}
+.service_icon {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #fff;
+    margin: 15px auto 0;
+    background-color: white;
+    border-radius: 50px;
+}
+.service_box h3 {
+	text-transform: capitalize;font-size: 1.5em;
+    letter-spacing: 2px;
+    color: white;
+    margin: 1.5em 0 1em;
+    padding-bottom: 1em;
+    position: relative;
+}
+
+.service_box h3:after {
+    content: '';
+    position: absolute;
+    width: 20%;
+    height: 2px;
+    background: blue;
+    left: 40%;
+    bottom: 0;
+}
+.icon {
+    color : blue;
+    padding:15px;
+    font-size:70px;
+}
