@@ -129,7 +129,7 @@ function setDataName(name,pretty){
 	update_tooltip();
 	
 	
-	var country_list = g.selectAll('path').data();
+	var country_list = svg.selectAll('path').data();
 	var name_list = [];
 	
 	for (var i = 0; i < country_list.length; i++)
@@ -161,7 +161,15 @@ function setDataName(name,pretty){
 				.style('fill',function(d,i) { return d3.interpolateReds(data_name_array[i]) });
 		}
 		
-	  } else {g.selectAll('path').style('fill','#cde');}
+		else if (document.getElementById("globe").style.display != 'none') {
+			svgGlobe.selectAll('path')
+				.style('fill',function(d,i) { return d3.interpolateReds(data_name_array[i]) });
+		}
+		
+		} else {
+			svg.selectAll('path').style('fill','#cde');
+			svgGlobe.selectAll('path').style('fill','#cde');
+		}
 
 	  update_tooltip();
 	  
