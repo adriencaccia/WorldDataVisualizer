@@ -20,8 +20,13 @@ var svgGlobe = d3.select("#globe").append("svg")
 var drag = d3.drag()
 			.on("start", dragstarted)
 			.on("drag", dragged);
+			
+var zoom = d3.zoom()
+    .scaleExtent([200, 10000])
+    .on("zoom", zoomed);
 
 svgGlobe.call(drag);
+svgGlobe.call(zoom);
 
 d3.json("data/countries_pretty.topo.json", function(error, us) {
     svgGlobe.append("g")
@@ -32,7 +37,7 @@ d3.json("data/countries_pretty.topo.json", function(error, us) {
         .append("path")
         .attr("id", function(d) { return d.id; })
         .attr("d", pathGlobe)
-        .on("click", country_clickedGlobe);
+        .on("mousedown", country_clickedGlobe);
 });
 
 
@@ -196,4 +201,9 @@ function dragged(){
 
 	svgGlobe.selectAll("path").attr("d", pathGlobe);
 
+}
+
+function zoomed() {
+	projectionGlobe.scale(d3.event.transform.k);
+	svgGlobe.selectAll("path").attr("d", pathGlobe);
 }
