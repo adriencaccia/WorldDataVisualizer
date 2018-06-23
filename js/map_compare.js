@@ -65,6 +65,7 @@ function get_xyz(d) {
   return [x, y, z];
 }
 var a=null;
+
 function country_clicked(d) {
 	
   if (country1 && data_name == 'none') {
@@ -77,40 +78,50 @@ function country_clicked(d) {
 		d3.select(this).style("fill", "#fa5");
 	}
 	name = d.properties.name;
-	for (var i = 0; i < dataset.length; i++)
-	{
-		if (dataset[i].country == name)
+    for (var i = 0; i < dataset.length; i++) {
+      if (dataset[i].country == name){
 			country1_data = dataset[i];
 	}
+    }
 	selected = selected+1;
 	//zoom(xyz);
   }
 
-  	else if (d && selected==1 && country2!== d){
-	if (a!==this){
-		d3.select(a).style("fill", "#cde");
-		a=this;
-	}
-	country2 = d;
-	
-	if (data_name == 'none'){
+  else if (d && selected==1 && country2!== d && country1 !== d) {
 
-		d3.select(this).style("fill", "#fa5");
-	}
+    g.selectAll('path').style("visibility", "hidden");
+	  country2 = d;
+	
+    g.select('#'+country1.id).style('fill', '#fa5');
+    g.select('#'+country1.id).style('visibility', 'visible');
+    g.select('#'+country2.id).style('fill', '#7536FE');
+    g.select('#'+country2.id).style('visibility', 'visible');
+    
+    country1_xyz = get_xyz(country1);
+    country2_xyz = get_xyz(country2);
+    console.log(country1, country2);
+
+
+    // g.transition()
+    //   .duration(1000)
+    //   .attr("transform", "translate(" + projectionFlat.translate() + 
+    //       ")scale(" + country1_xyz[2] + ")translate(-" + country1_xyz[0] +
+    //       ",-" + country1_xyz[1] + ")")
+    //   .select('#' + country1.id);
+
 	name = d.properties.name;
-	for (var i = 0; i < dataset.length; i++)
-	{
-		if (dataset[i].country == name){
+    for (var i = 0; i < dataset.length; i++) {
+      if (dataset[i].country == name) {
 			country2_data = dataset[i];
 			console.log(country1_data.country);
 			console.log(country2_data.country);
-
 		}
 	}
   	update_tooltip()
   	}
 
 	else {
+    g.selectAll('path').style("visibility", "visible");
    	g.selectAll('path').style("fill","#cde");
 	var xyz = [width / 2, height / 1.5, 1];
 	country1 = country2 = country1_data = country2_data = null;
