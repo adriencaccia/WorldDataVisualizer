@@ -36,7 +36,7 @@ d3.json("data/countries_pretty.topo.json", function(error, us) {
 	.on("click", country_clicked);
 });
 
-function zoom(xyz) {
+function zoomFlat(xyz) {
   svg.transition()
 	.duration(750)
 	.attr("transform", "translate(" + projectionFlat.translate() + ")scale(" + xyz[2] + ")translate(-" + xyz[0] + ",-" + xyz[1] + ")")
@@ -73,12 +73,12 @@ function country_clicked(d) {
 		if (dataset[i].country == name)
 			country_data = dataset[i];
 	}
-	zoom(xyz);
+	zoomFlat(xyz);
 	update_tooltip();
   } else {
 	var xyz = [width / 2, height / 1.5, 1];
 	country = null;
-	zoom(xyz);
+	zoomFlat(xyz);
   }
 }
 
