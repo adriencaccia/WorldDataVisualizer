@@ -179,6 +179,20 @@ body {
 	stroke-linecap:round;
 }
 
+#country1 {
+	fill:#cde;
+	stroke:#fff;
+	stroke-linejoin:round;
+	stroke-linecap:round;
+}
+
+#country2 {
+	fill:#cde;
+	stroke:#fff;
+	stroke-linejoin:round;
+	stroke-linecap:round;
+}
+
 pre.prettyprint {
 	border:1px solid #ccc;
 	margin-bottom:0;
