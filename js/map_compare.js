@@ -271,7 +271,7 @@ function update_tooltip() {
 
 
 				c1= document.createElement("div")
-					c1.innerHTML = data_country1[i].toLocaleString("en-US");
+          c1.innerHTML = data_country1[i].toLocaleString("en-US");
 					c1.setAttribute("class","row");
 				c2= document.createElement("div")
 					c2.innerHTML = data_country2[i].toLocaleString("en-US");
@@ -280,7 +280,18 @@ function update_tooltip() {
 					f.innerHTML = "<b>"+features[i].toLocaleString("en-US")+"<b>";
 					f.setAttribute("class","row");
 					
-
+        if (data_country1[i] < data_country2[i]) {
+          c1.style='color:#e8201e';
+          c2.style='color:#36ad29';
+        }
+        else if (data_country1[i] > data_country2[i]) {
+          c1.style='color:#36ad29';
+          c2.style='color:#e8201e';
+        }
+        else {
+          c1.style='color:#4a5df1';
+          c2.style='color:#4a5df1';
+        }
 
 					c1_html.appendChild(c1);
 					c2_html.appendChild(c2);
