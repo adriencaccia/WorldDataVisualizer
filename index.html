@@ -3,110 +3,119 @@
   <head>
     <meta charset="utf-8">
     <title> Data Visualisation </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossOrigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="css/home.css"> 
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.8.0/d3.js"></script>
+
 	<script src="https://unpkg.com/topojson-client@3"></script>
-	<script src="//code.jquery.com/jquery-2.0.0.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 	<script src="https://d3js.org/d3-color.v1.min.js"></script>
 	<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
 	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  
+  <script>
+  
+$(document).ready(function(){
+  $('#welcome').fadeIn(1000);
+});
+  </script>
 
   </head>
 
   <body>
-	<div class="menu-wrap">
-		<nav class="menu">
-			<ul class="clearfix">
-				<li><a onclick="render_map()">Map</a></li>
-				<li><a onclick="render_globe()">Globe</a></li>
-				<li><a onclick="render_table()">Table</a></li>
-				<li><a>Data Group <span class="arrow">&#9660;</span></a>
-					<ul class="sub-menu">
-						<li><a onclick="setDataType('general')">General</a></li>
-						<li><a onclick="setDataType('economics')">Economics</a></li>
-						<li><a onclick="setDataType('resources')">Resources</a></li>
-						<li><a onclick="setDataType('health')">Health</a></li>
-						<li><a onclick="setDataType('tech')">Tech</a></li>
-					</ul>
-				</li>
-				<li><a>Data <span class="arrow">&#9660;</span></a>
-					<ul class="scrollable-menu">
-						<li><a onclick="setDataName('none',this.innerHTML)">None</a></li>
-						<li><a>General</a>
-							<ul>
-								<li><a class="scrollable-item" onclick="setDataName('area_sqkm',this.innerHTML)">Area</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('population',this.innerHTML)">Population</a></li>
-							</ul>
-						</li>
-						<li><a>Economics</a>
-							<ul>
-								<li><a class="scrollable-item" onclick="setDataName('account_balance',this.innerHTML)">Account balance</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('exports',this.innerHTML)">Exports</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('debt_external',this.innerHTML)">External debt</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('gold_reserves',this.innerHTML)">Foreign exchange & gold reserves</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('gdp',this.innerHTML)">GDP</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('gdp_growthrate',this.innerHTML)">GDP growth rate</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('gdp_percapita',this.innerHTML)">GDP per capita</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('imports',this.innerHTML)">Imports</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('inflation',this.innerHTML)">Inflation</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('investment',this.innerHTML)">Investment</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('labor_force',this.innerHTML)">Labor force</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('debt_public',this.innerHTML)">Public debt</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('military_gdp',this.innerHTML)">Military expenditures - GDP</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('military_dollar',this.innerHTML)">Military expenditures - USD</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('unemployment',this.innerHTML)">Unemployment rate</a></li>
-							</ul>
-						</li>
-						<li><a>Resources</a>
-							<ul>
-								<li><a class="scrollable-item" onclick="setDataName('elec_consumption',this.innerHTML)">Electricity consumption</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('elec_production',this.innerHTML)">Electricity production</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('gas_consumption',this.innerHTML)">Gas consumption</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('gas_exports',this.innerHTML)">Gas exports</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('gas_imports',this.innerHTML)">Gas imports</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('gas_production',this.innerHTML)">Gas production</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('oil_consumption',this.innerHTML)">Oil consumption</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('oil_exports',this.innerHTML)">Oil exports</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('oil_imports',this.innerHTML)">Oil imports</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('oil_production',this.innerHTML)">Oil production</a></li>
-							</ul>
-						</li>
-						<li><a>Health</a>
-							<ul>
-								<li><a class="scrollable-item" onclick="setDataName('birth_rate',this.innerHTML)">Birth rate</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('death_rate',this.innerHTML)">Death rate</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('fertility_rate',this.innerHTML)">Fertility rate</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('hiv_prevalence',this.innerHTML)">HIV prevalence rate</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('infant_mortality',this.innerHTML)">Infant mortality</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('life_expectancy',this.innerHTML)">Life expectancy</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('hiv_living',this.innerHTML)">People living with HIV</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('hiv_deaths',this.innerHTML)">People dead because of HIV</a></li>
-							</ul>
-						</li>
-						<li><a>Tech</a>
-							<ul>
-								<li><a class="scrollable-item" onclick="setDataName('highways',this.innerHTML)">Highways</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('internet_hosts',this.innerHTML)">Internet hosts</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('internet_users',this.innerHTML)">Internet users</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('railways',this.innerHTML)">Railways</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('telephone_mainlines',this.innerHTML)">Telephone - main</a></li>
-								<li><a class="scrollable-item" onclick="setDataName('telephone_mobile',this.innerHTML)">Telephone - mobile</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</nav>
-	</div>
-	
-	<div id="map" style="display:block"></div>
-	<!-- <svg id="legend"></svg> -->
-	<div id="globe" style="display:none"></div>
-	<div id="table" style="display:none"></div>
-    <script type="text/javascript" src="js/init.js"></script>
-    <script type="text/javascript" src="js/map.js"></script>
-    <script type="text/javascript" src="js/table.js"></script>
-    <script type="text/javascript" src="js/globe.js"></script>
+
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar-static-top ">
+      <div class="container">
+
+  <!-- Brand -->
+  <a class="navbar-brand" href="index.html">World Data Visualizator</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav navbar-btn">
+    <li class="nav-item">
+      <a class="nav-link" href="#" >Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"href="render.html">Explore</a>
+    </li>
+        <li class="nav-item">
+      <a class="nav-link" href="compare.html">Compare</a>
+    </li>
+            <li class="nav-item">
+      <a class="nav-link" id="aboutbut">About us</a>
+    </li>
+
+
+
+  </ul>
+</div>
+</nav>
+</body>
+<div class ="black" id='welcome'>
+  <h2>Welcome to World Data Visualizator</h2>
+  <h3>Discover new things about the world's countries.</h3>
+  <p>General Informations, Health, Tech, and more available with an interactive map.</p>
+  <a  id="but">
+  <button type="button" id="#seemore" class="btn gradient-button">See more</button>
+  </a>
+</div>
+
+<div class ="black" id='cards' style="display:none;">
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
+<div class="services-section" id="services">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="service_box">
+          <div class="service_icon">
+            <img src="http://icons.iconarchive.com/icons/custom-icon-design/mono-general-4/256/eye-icon.png" class="img-fluid">
+          </div>
+          <h3>Explore</h3>
+          <p>Explore some intresting informations about the world's countries using our interactive map or globe.</p>
+          <a href="render.html">
+          <button type="submit" class="btn btn-default">Let's go</button>
+        </a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="service_box">
+          <div class="service_icon">
+           <img src="https://www.freeiconspng.com/uploads/compare-icon-5.png" class="img-fluid">
+          </div>
+          <h3>Compare</h3>
+          <p>Compare those data between the world's countries by selof them from the map or the globe.</p>
+          <a href="compare.html"><button type="submit" class="btn btn-default" >Let's go</button></a>
+        </div>
+      </div>
+      <div class="clearfix"> </div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+<div class ="black" id='about'>
+  <h2>IGR204 : Visualization</h2>
+  <h3>Professor : James Eagan</h3>
+    <h3>Students :</h3><h4> Ahmed Ben Saad<br>Adrien Cacciaguerra<br> Charles Boulitrop<br> Philippe Edwards </h4>
+</div>
+
+
+
+
   </body>
+  <script >
+  $('#but').on('click', function(event) {
+  $('#welcome').hide();
+  $('#cards').fadeIn(1500);
+});
+   $('#aboutbut').on('click', function(event) {
+  $('#welcome').hide();
+  $('#cards').hide();
+  $('#about').fadeIn(1500);
+});
+  </script>
 </html>
