@@ -155,14 +155,14 @@ body {
     display:block;
 }
 #map {
-	background-color:#9cd8f9;
+	background-color:#9bd8ff;
 	border:none;
 	position: relative;
 	width:100%;
 	height : 100%;
 }
 #globe {
-        background-color:#fff;
+        background-color:#9bd8ff;
         border:none;
         width:100%;
 }
@@ -173,21 +173,21 @@ body {
 }
 
 #countries {
-	fill:#cde;
+	fill:#ccaa66;
 	stroke:#fff;
 	stroke-linejoin:round;
 	stroke-linecap:round;
 }
 
 #country1 {
-	fill:#cde;
+	fill:#ccaa66;
 	stroke:#fff;
 	stroke-linejoin:round;
 	stroke-linecap:round;
 }
 
 #country2 {
-	fill:#cde;
+	fill:#ccaa66;
 	stroke:#fff;
 	stroke-linejoin:round;
 	stroke-linecap:round;

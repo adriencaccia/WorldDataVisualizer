@@ -51,7 +51,7 @@ function render_globe() {
 function country_clickedGlobe(d) {
 
   if (country && data_name == 'none') {
-        svgGlobe.selectAll('path').style("fill","#cde");
+        svgGlobe.selectAll('path').style("fill","#ccaa66");
         document.getElementById("data_card").style.visibility='hidden';
 
   }
@@ -60,7 +60,7 @@ function country_clickedGlobe(d) {
         svg.attr("transform","translate("+0+","+0+") scale("+1+")");
         country = d;
         if (data_name == 'none'){
-                d3.select(this).style("fill", "#fa5");
+                d3.select(this).style("fill", "#f05d5e");
         }
         name = d.properties.name;
         for (var i = 0; i < dataset.length; i++)

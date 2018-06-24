@@ -59,7 +59,7 @@ function country_clicked(d) {
 
   if (country && data_name == 'none') {
   	document.getElementById("data_card").style.visibility='hidden';
-	svg.selectAll('path').style("fill","#cde");
+	svg.selectAll('path').style("fill","#ccaa66");
   }
 
   if (d && country !== d) {
@@ -67,7 +67,7 @@ function country_clicked(d) {
 	var xyz = get_xyz(d);
 	country = d;
 	if (data_name == 'none'){
-		d3.select(this).style("fill", "#fa5");
+		d3.select(this).style("fill", "#f05d5e");
 	}
 	name = d.properties.name;
 	for (var i = 0; i < dataset.length; i++)

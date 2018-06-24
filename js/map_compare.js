@@ -113,7 +113,7 @@ function country_clicked(d) {
   if (d && country1 !== d && selected==0) {
     country1 = d;
     if (data_name == 'none'){
-      d3.select(this).style("fill", "#fa5");
+      d3.select(this).style("fill", "#f05d5e");
     }
     name = d.properties.name;
     for (var i = 0; i < dataset.length; i++) {
@@ -130,9 +130,9 @@ function country_clicked(d) {
     g.style('visibility','hidden');
 	  country2 = d;
 	
-    g1.select('#'+country1.id).style('fill', '#fa5');
+    g1.select('#'+country1.id).style('fill', '#f05d5e');
     g1.select('#'+country1.id).style('visibility', 'visible');
-    g2.select('#'+country2.id).style('fill', '#7536FE');
+    g2.select('#'+country2.id).style('fill', '#0f7173');
     g2.select('#'+country2.id).style('visibility', 'visible');
     
     country1_xyz = get_xyz(country1);
@@ -161,12 +161,12 @@ function country_clicked(d) {
 
 	else {
     
-    g1.select('#'+country1.id).style('fill', '#cde');
+    g1.select('#'+country1.id).style('fill', '#ccaa66');
     g1.select('#'+country1.id).style('visibility', 'hidden');
-    g2.select('#'+country2.id).style('fill', '#cde');
+    g2.select('#'+country2.id).style('fill', '#ccaa66');
     g2.select('#'+country2.id).style('visibility', 'hidden');
     g.style('visibility','visible');
-    g.select('#'+country1.id).style('fill', '#cde');
+    g.select('#'+country1.id).style('fill', '#ccaa66');
     var xyz = [width / 2, height / 1.5, 1];
     country1 = country2 = country1_data = country2_data = null;
     selected=0;
