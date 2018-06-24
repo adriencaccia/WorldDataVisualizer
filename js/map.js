@@ -25,7 +25,7 @@ svg.append("rect")
 	.attr("height", height)
 	.on("click", country_clicked);
 
-d3.json("data/countries_pretty.topo.json", function(error, us) {
+d3.json("data/countries_pretty_fixed.topo.json", function(error, us) {
   svg.append("g")
 	.attr("id", "countries")
 	.selectAll("path")

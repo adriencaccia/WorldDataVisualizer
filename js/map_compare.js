@@ -31,7 +31,7 @@ var g = svg.append("g");
 var g1 = svg.append("g");
 var g2 = svg.append("g");
 
-d3.json("data/countries_pretty.topo.json", function(error, us) {
+d3.json("data/countries_pretty_fixed.topo.json", function(error, us) {
   g.attr("id", "countries")
     .selectAll("path")
     .data(topojson.feature(us, us.objects.countries).features)
@@ -42,7 +42,7 @@ d3.json("data/countries_pretty.topo.json", function(error, us) {
     .on("click", country_clicked);
 });
 
-d3.json("data/countries_pretty.topo.json", function(error, us) {
+d3.json("data/countries_pretty_fixed.topo.json", function(error, us) {
   g1.attr("id", "country1")
     .selectAll("path")
     .data(topojson.feature(us, us.objects.countries).features)
@@ -53,7 +53,7 @@ d3.json("data/countries_pretty.topo.json", function(error, us) {
     .style("visibility","hidden");
 });
 
-d3.json("data/countries_pretty.topo.json", function(error, us) {
+d3.json("data/countries_pretty_fixed.topo.json", function(error, us) {
   g2.attr("id", "country2")
     .selectAll("path")
     .data(topojson.feature(us, us.objects.countries).features)
