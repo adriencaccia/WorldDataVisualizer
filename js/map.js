@@ -14,12 +14,10 @@ var pathFlat = d3.geoPath()
 	.projection(projectionFlat);
 
 var svg = d3.select("#map").append("svg")
-    .attr("preserveAspectRatio", "xMidYMid")
     .attr("viewBox", "0 0 " + width + " " + height)
     .attr("width", m_width)
     .attr("height", m_width * height / width)
 	.append("g");
-
 
 svg.append("rect")
 	.attr("class", "background")
@@ -27,10 +25,8 @@ svg.append("rect")
 	.attr("height", height)
 	.on("click", country_clicked);
 
-var g = svg.append("g");
-
 d3.json("data/countries_pretty.topo.json", function(error, us) {
-  g.append("g")
+  svg.append("g")
 	.attr("id", "countries")
 	.selectAll("path")
 	.data(topojson.feature(us, us.objects.countries).features)
@@ -41,13 +37,9 @@ d3.json("data/countries_pretty.topo.json", function(error, us) {
 	.on("click", country_clicked);
 });
 
-var tooltip = d3.select("body")
-	.append("div")
-	.attr("id","tooltip");
-
-function zoom(xyz) {
-  g.transition()
-	.duration(1000)
+function zoomFlat(xyz) {
+  svg.transition()
+	.duration(750)
 	.attr("transform", "translate(" + projectionFlat.translate() + ")scale(" + xyz[2] + ")translate(-" + xyz[0] + ",-" + xyz[1] + ")")
 	.selectAll(["#countries"])
 	.style("stroke-width", 1.0 / xyz[2] + "px");
@@ -67,7 +59,7 @@ function country_clicked(d) {
 
   if (country && data_name == 'none') {
   	document.getElementById("data_card").style.visibility='hidden';
-	g.selectAll('path').style("fill","#cde");
+	svg.selectAll('path').style("fill","#cde");
   }
 
   if (d && country !== d) {
@@ -83,12 +75,12 @@ function country_clicked(d) {
 		if (dataset[i].country == name)
 			country_data = dataset[i];
 	}
-	zoom(xyz);
-	update_tooltip()
+	zoomFlat(xyz);
+	update_tooltip();
   } else {
 	var xyz = [width / 2, height / 1.5, 1];
 	country = null;
-	zoom(xyz);
+	zoomFlat(xyz);
   }
 }
 
