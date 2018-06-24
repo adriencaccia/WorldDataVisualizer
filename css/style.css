@@ -155,7 +155,7 @@ body {
     display:block;
 }
 #map {
-	background-color:#fff;
+	background-color:#9cd8f9;
 	border:none;
 	position: relative;
 	width:100%;
@@ -173,6 +173,20 @@ body {
 }
 
 #countries {
+	fill:#cde;
+	stroke:#fff;
+	stroke-linejoin:round;
+	stroke-linecap:round;
+}
+
+#country1 {
+	fill:#cde;
+	stroke:#fff;
+	stroke-linejoin:round;
+	stroke-linecap:round;
+}
+
+#country2 {
 	fill:#cde;
 	stroke:#fff;
 	stroke-linejoin:round;
