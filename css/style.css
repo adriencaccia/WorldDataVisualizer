@@ -172,25 +172,23 @@ body {
 	pointer-events:all;
 }
 
-#countries {
+#countries, #country1, #country2 {
 	fill:#ccaa66;
 	stroke:#fff;
 	stroke-linejoin:round;
 	stroke-linecap:round;
 }
 
-#country1 {
-	fill:#ccaa66;
-	stroke:#fff;
-	stroke-linejoin:round;
-	stroke-linecap:round;
+#globe1 {
+  position: absolute;
+  top: 5vh;
+  left: 0vw;
 }
 
-#country2 {
-	fill:#ccaa66;
-	stroke:#fff;
-	stroke-linejoin:round;
-	stroke-linecap:round;
+#globe2 {
+  position: absolute;
+  top: 5vh;
+  left: 50vw;
 }
 
 .water {

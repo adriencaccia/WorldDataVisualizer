@@ -33,6 +33,7 @@ svgGlobe.append("rect")
   .attr("class", "background")
   .attr("width", width*4)
   .attr("height", height*4)
+  .on("click", country_clickedGlobe)
   .call(d3.drag()
     .subject(function () { var r = projectionGlobe.rotate(); return { x: r[0] / sens, y: -r[1] / sens }; })
     .on("drag", function () {
@@ -46,6 +47,7 @@ svgGlobe.append("path")
   .datum({ type: "Sphere" })
   .attr("class", "water")
   .attr("d", pathGlobe)
+  .on("click", country_clickedGlobe)
   .call(d3.drag()
     .subject(function () { var r = projectionGlobe.rotate(); return { x: r[0] / sens, y: -r[1] / sens }; })
     .on("drag", function () {
@@ -92,7 +94,7 @@ function country_clickedGlobe(d) {
     document.getElementById("data_card").style.visibility='hidden';
   }
 
-  if (d && country !== d) {
+  if (d && country !== d && d.type !== 'Sphere') {
     svgGlobe.attr("transform","translate("+0+","+0+") scale("+1+")");
     country = d;
     if (data_name == 'none'){
@@ -246,7 +248,6 @@ function zoomed() {
 }
 
 var rotateMe = function (d) {
-  console.log(d);
   projectionGlobe.rotate(),
     focusedCountry = d, //get the clicked country's details
     p = d3.geoCentroid(focusedCountry);
