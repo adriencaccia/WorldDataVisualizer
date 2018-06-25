@@ -148,16 +148,14 @@ function country_clicked(d) {
     //       ",-" + country1_xyz[1] + ")")
     //   .select('#' + country1.id);
 
-	name = d.properties.name;
-    for (var i = 0; i < dataset.length; i++) {
-      if (dataset[i].country == name) {
-			country2_data = dataset[i];
-			console.log(country1_data.country);
-			console.log(country2_data.country);
-		}
-	}
+    name = d.properties.name;
+      for (var i = 0; i < dataset.length; i++) {
+        if (dataset[i].country == name) {
+        country2_data = dataset[i];
+      }
+    }
   	update_tooltip()
-  	}
+  }
 
 	else {
     
