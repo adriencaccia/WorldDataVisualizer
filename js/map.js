@@ -63,20 +63,20 @@ function country_clicked(d) {
   }
 
   if (d && country !== d) {
-	svg.attr("transform","translate("+0+","+0+") scale("+1+")");
-	var xyz = get_xyz(d);
-	country = d;
-	if (data_name == 'none'){
-		d3.select(this).style("fill", "#f05d5e");
-	}
-	name = d.properties.name;
-	for (var i = 0; i < dataset.length; i++)
-	{
-		if (dataset[i].country == name)
-			country_data = dataset[i];
-	}
-	zoomFlat(xyz);
-	update_tooltip();
+    svg.attr("transform","translate("+0+","+0+") scale("+1+")");
+    var xyz = get_xyz(d);
+    country = d;
+    if (data_name == 'none'){
+      d3.select(this).style("fill", "#f05d5e");
+    }
+    name = d.properties.name;
+    for (var i = 0; i < dataset.length; i++)
+    {
+      if (dataset[i].country == name)
+        country_data = dataset[i];
+    }
+    zoomFlat(xyz);
+    update_tooltip();
   } else {
 	var xyz = [width / 2, height / 1.5, 1];
 	country = null;

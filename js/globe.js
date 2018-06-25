@@ -37,7 +37,8 @@ d3.json("data/countries_pretty.topo.json", function(error, us) {
         .append("path")
         .attr("id", function(d) { return d.id; })
         .attr("d", pathGlobe)
-        .on("mousedown", country_clickedGlobe);
+        .on("click", rotateMe)
+        .on("click", country_clickedGlobe);
 });
 
 
@@ -50,28 +51,27 @@ function render_globe() {
 }
 
 function country_clickedGlobe(d) {
-
   if (country && data_name == 'none') {
-        svgGlobe.selectAll('path').style("fill","#ccaa66");
-        document.getElementById("data_card").style.visibility='hidden';
+    svgGlobe.selectAll('path').style("fill","#ccaa66");
+    document.getElementById("data_card").style.visibility='hidden';
   }
 
   if (d && country !== d) {
-        svgGlobe.attr("transform","translate("+0+","+0+") scale("+1+")");
-        country = d;
-        if (data_name == 'none'){
-                d3.select(this).style("fill", "#f05d5e");
-        }
-        name = d.properties.name;
-        for (var i = 0; i < dataset.length; i++)
-        {
-                if (dataset[i].country == name)
-                        country_data = dataset[i];
-        }
-        update_tooltip()
+    svgGlobe.attr("transform","translate("+0+","+0+") scale("+1+")");
+    country = d;
+    if (data_name == 'none'){
+            d3.select(this).style("fill", "#f05d5e");
+    }
+    name = d.properties.name;
+    for (var i = 0; i < dataset.length; i++) {
+      if (dataset[i].country == name)
+        country_data = dataset[i];
+    }
+    update_tooltip();
+    rotateMe(d);
   } else {
-        var xyz = [width / 2, height / 2, 1];
-        country = null;
+    var xyz = [width / 2, height / 2, 1];
+    country = null;
   }
 }
 
@@ -188,7 +188,7 @@ var gpos0, o0;
 function dragstarted(){
 
 	gpos0 = projectionGlobe.invert(d3.mouse(this));
-	o0 = projectionGlobe.rotate();
+  o0 = projectionGlobe.rotate();
 }
 
 function dragged(){
@@ -208,3 +208,24 @@ function zoomed() {
 	projectionGlobe.scale(d3.event.transform.k);
 	svgGlobe.selectAll("path").attr("d", pathGlobe);
 }
+
+var rotateMe = function (d) {
+  var rotate = projectionGlobe.rotate(),
+    focusedCountry = d, //get the clicked country's details
+    p = d3.geoCentroid(focusedCountry);
+
+    console.log(d);
+  //Globe rotating
+
+  (function transition() {
+    d3.transition()
+      .duration(2500)
+      .tween("rotate", function () {
+        var r = d3.interpolate(projectionGlobe.rotate(), [-p[0], -p[1]]);
+        return function (t) {
+          projectionGlobe.rotate(r(t));
+          svgGlobe.selectAll("path").attr("d", pathGlobe);
+        };
+      })
+  })();
+};
