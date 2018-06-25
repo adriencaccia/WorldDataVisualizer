@@ -246,3 +246,27 @@ th, td {
 
 
 tr:hover {background-color: #def;}
+
+.bullet { font: 10px sans-serif; }
+.bullet .marker { stroke: #000; stroke-width: 2px; }
+.bullet .tick line { stroke: #666; stroke-width: .5px; }
+.bullet .range.s0 { fill: #f05d5e; }
+.bullet .range.s1 { fill: #f05d5e; }
+.bullet .range.s2 { fill: #f05d5e; }
+.bullet .measure.s0 { fill: #0f7173; }
+.bullet .measure.s1 { fill: #0f7173; }
+.bullet .title { font-size: 14px; font-weight: bold; }
+.bullet .subtitle { fill: #999; }
+
+#c1Title {
+	color: #f05d5e;
+	top: 8px;
+	left: 50px;
+}
+
+#c2Title {
+	position: absolute;
+	top: 8px;
+	right: 0px;
+	color: #0f7173;
+}
