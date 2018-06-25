@@ -162,9 +162,9 @@ body {
 	height : 100%;
 }
 #globe {
-        background-color:#9bd8ff;
-        border:none;
-        width:100%;
+  background-color:#ffffff;
+  border:none;
+  width:100%;
 }
 
 .background {
@@ -191,6 +191,11 @@ body {
 	stroke:#fff;
 	stroke-linejoin:round;
 	stroke-linecap:round;
+}
+
+.water {
+  fill: #9bd8ff;
+  cursor: move;
 }
 
 pre.prettyprint {

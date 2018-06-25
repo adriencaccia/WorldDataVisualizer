@@ -1,6 +1,7 @@
 var g_width = $("#globe").width(),
     width = 938,
     height = 500,
+    sens = 0.25,
 	name,
 	country_data,
     country;
@@ -25,22 +26,56 @@ var zoom = d3.zoom()
     .scaleExtent([200, 10000])
     .on("zoom", zoomed);
 
-svgGlobe.call(drag);
+// svgGlobe.call(drag);
 svgGlobe.call(zoom);
+
+svgGlobe.append("rect")
+  .attr("class", "background")
+  .attr("width", width*4)
+  .attr("height", height*4)
+  .call(d3.drag()
+    .subject(function () { var r = projectionGlobe.rotate(); return { x: r[0] / sens, y: -r[1] / sens }; })
+    .on("drag", function () {
+      var rotate = projectionGlobe.rotate();
+      projectionGlobe.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
+      svgGlobe.selectAll("path").attr("d", pathGlobe);
+      svgGlobe.selectAll(".focused").classed("focused", focused = false);
+    }));
+
+svgGlobe.append("path")
+  .datum({ type: "Sphere" })
+  .attr("class", "water")
+  .attr("d", pathGlobe)
+  .call(d3.drag()
+    .subject(function () { var r = projectionGlobe.rotate(); return { x: r[0] / sens, y: -r[1] / sens }; })
+    .on("drag", function () {
+      var rotate = projectionGlobe.rotate();
+      projectionGlobe.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
+      svgGlobe.selectAll("path").attr("d", pathGlobe);
+      svgGlobe.selectAll(".focused").classed("focused", focused = false);
+    }));
 
 d3.json("data/countries_pretty.topo.json", function(error, us) {
     svgGlobe.append("g")
 	.attr("id", "countries")
-        .selectAll("path")
-        .data(topojson.feature(us, us.objects.countries).features)
-        .enter()
-        .append("path")
-        .attr("id", function(d) { return d.id; })
-        .attr("d", pathGlobe)
-        .on("click", rotateMe)
-        .on("click", country_clickedGlobe);
+  .selectAll("path")
+  .data(topojson.feature(us, us.objects.countries).features)
+  .enter()
+  .append("path")
+  .attr("id", function(d) { return d.id; })
+  .attr("d", pathGlobe)
+  .on("click", rotateMe)
+  .on("click", country_clickedGlobe)
+  .call(d3.drag()
+    .subject(function () { var r = projectionGlobe.rotate(); return { x: r[0] / sens, y: -r[1] / sens }; })
+    .on("drag", function () {
+      var rotate = projectionGlobe.rotate();
+      projectionGlobe.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
+      svgGlobe.selectAll("path").attr("d", pathGlobe);
+      svgGlobe.selectAll(".focused").classed("focused", focused = false);
+    })
+  );
 });
-
 
 function render_globe() {
 	if(document.getElementById("globe").style.display == 'none'){
@@ -52,7 +87,8 @@ function render_globe() {
 
 function country_clickedGlobe(d) {
   if (country && data_name == 'none') {
-    svgGlobe.selectAll('path').style("fill","#ccaa66");
+    svgGlobe.selectAll('path').style("fill", "#ccaa66");
+    svgGlobe.select('path.water').style("fill", "#9bd8ff");
     document.getElementById("data_card").style.visibility='hidden';
   }
 
@@ -210,11 +246,10 @@ function zoomed() {
 }
 
 var rotateMe = function (d) {
-  var rotate = projectionGlobe.rotate(),
+  console.log(d);
+  projectionGlobe.rotate(),
     focusedCountry = d, //get the clicked country's details
     p = d3.geoCentroid(focusedCountry);
-
-    console.log(d);
   //Globe rotating
 
   (function transition() {
