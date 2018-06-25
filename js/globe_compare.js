@@ -145,7 +145,8 @@ function resetGlobe() {
   svgGlobe2.select('#' + country2.id).style('fill', '#ccaa66');
   svgGlobe2.style('visibility', 'hidden');
   svgGlobe.style('visibility', 'visible');
-  svgGlobe.select('#' + country1.id).style('fill', '#ccaa66');
+  svgGlobe.select('#' + country1.id).style('fill', '#ccaa66');  
+  document.getElementById("data_card").style.visibility='hidden';
   country1 = country2 = country1_data = country2_data = null;
   selected = 0;
 }
@@ -216,6 +217,7 @@ function country_clickedGlobe(d) {
     svgGlobe.style('visibility', 'visible');
     svgGlobe.select('#' + country1.id).style('fill', '#ccaa66');
     country1 = country2 = country1_data = country2_data = null;
+    document.getElementById("data_card").style.visibility='hidden';
     selected = 0;
   }
 }
