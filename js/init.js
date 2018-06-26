@@ -171,7 +171,7 @@ function setDataName(name,pretty){
 		}
 		
 		} else {
-			svg.selectAll('path').style('fill','#cde');
+			svg.selectAll('path').style('fill','#ccaa66');
 			svgGlobe.selectAll('path').style('fill','#cde');
 		}
 

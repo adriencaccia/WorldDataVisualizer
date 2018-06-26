@@ -38,18 +38,81 @@
 
     <!-- Dropdown -->
     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
+      <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown"onclick="setDataName('none',this.innerHTML)">
         Colorize by
       </a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Link 1</a>
-        <a class="dropdown-item" href="#">Link 2</a>
-        <a class="dropdown-item" href="#">Link 3</a>
-      </div>
-    </li>
+            <ul class="dropdown-menu">
+
+
+              <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">General</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" onclick="setDataName('area_sqkm',this.innerHTML)">Area</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('population',this.innerHTML)">Population</a></li>
+                </ul>
+              </li>
+              <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Economics</a>
+                <ul class="dropdown-menu">
+       <li> <a class="dropdown-item" onclick="setDataName('account_balance',this.innerHTML)">Account balance</a></li>
+       <li> <a class="dropdown-item"onclick="setDataName('gdp',this.innerHTML)">GDP</a></li>
+        <li><a class="dropdown-item"onclick="setDataName('inflation',this.innerHTML)">Inflation</a></li>
+        <li><a class="dropdown-item"onclick="setDataName('debt_external',this.innerHTML)">External debt</a></li>
+       <li> <a class="dropdown-item"onclick="setDataName('imports',this.innerHTML)">Imports</a></li>
+        <li><a class="dropdown-item"onclick="setDataName('unemployment',this.innerHTML)">Unemployment rate</a></li>
+        <li><a class="dropdown-item"onclick="setDataName('gdp_percapita',this.innerHTML)">GDP per capita</a></li>
+        <li><a class="dropdown-item"onclick="setDataName('gdp_growthrate',this.innerHTML)">GDP growth rate</a></li>
+        <li><a class="dropdown-item"onclick="setDataName('debt_public',this.innerHTML)">Public debt</a></li>
+        <li><a class="dropdown-item"onclick="setDataName('exports',this.innerHTML)">Exports</a></li>
+        <li><a class="dropdown-item"onclick="setDataName('investment',this.innerHTML)">Investment</a></li>
+        <li><a class="dropdown-item"onclick="setDataName('labor_force',this.innerHTML)">Labor force</a></li>
+        <li><a class="dropdown-item"onclick="setDataName('military_dollar',this.innerHTML)">Military expenditures (USD)</a></li>
+        <li><a class="dropdown-item"onclick="setDataName('military_gdp',this.innerHTML)">Military expenditures (%GDP)</a></li>
+        <li><a class="dropdown-item"onclick="setDataName('gold_reserves',this.innerHTML)">Foreign exchange and gold reserves</a></li>
+                </ul>
+              </li>
+                      <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Resources</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" onclick="setDataName('elec_production',this.innerHTML)">Electricity production</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('gas_production',this.innerHTML)">Gas production</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('gas_exports',this.innerHTML)">Gas exports</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('oil_production',this.innerHTML)">Oil production</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('gas_exports',this.innerHTML)">Oil exports</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('elec_consumption',this.innerHTML)">Electricity consumption</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('gas_consumption',this.innerHTML)">Gas consumption</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('gas_imports',this.innerHTML)">Gas imports</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('oil_consumption',this.innerHTML)">Oil consumption</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('oil_imports',this.innerHTML)">Oil imports</a></li>
+
+                </ul>
+              </li>
+              <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Health</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" onclick="setDataName('birth_rate',this.innerHTML)">Birth rate</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('death_rate',this.innerHTML)">Death rate</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('life_expectancy',this.innerHTML)">Life expectancy</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('infant_mortality',this.innerHTML)">Infant mortality</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('hiv_living',this.innerHTML)">People living with HIV</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('hiv_prevalence',this.innerHTML)">HIV prevalence rate</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('fertility_rate',this.innerHTML)">Fertility rate</a></li>
+
+                </ul>
+              </li>
+              <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Tech</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" onclick="setDataName('highways',this.innerHTML)">Highways</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('internet_hosts',this.innerHTML)">Internet hosts</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('telephone_mainlines',this.innerHTML)">Telephone main lines</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('railways',this.innerHTML)">Railways</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('internet_users',this.innerHTML)">Internet users</a></li>
+                  <li><a class="dropdown-item" onclick="setDataName('telephone_mobile',this.innerHTML)">Telephone mobile lines</a></li>
+                </ul>
+              </li>
+
+
+
 
   </ul>
 </nav>
+
 
 
 <div id="data_card" class="card " style="position:absolute;z-index: 5;top:40%;left:40%;visibility: hidden">
@@ -92,6 +155,25 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
+<script>
+  
+$('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+  if (!$(this).next().hasClass('show')) {
+    $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+  }
+  var $subMenu = $(this).next(".dropdown-menu");
+  $subMenu.toggleClass('show');
+
+
+  $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+    $('.dropdown-submenu .show').removeClass("show");
+  });
+
+
+  return false;
+});
+
+</script>
 
 
   </body>
